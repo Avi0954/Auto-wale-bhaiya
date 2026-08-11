@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PlayerUI } from '../components/Player/PlayerUI';
+import { LivePassengerIndicator } from '../components/UI/LivePassengerIndicator';
 import { usePlayerStore } from '../store/usePlayerStore';
 
 
@@ -43,6 +44,9 @@ export const Ride: React.FC = () => {
 
       {/* Very Subtle Overlay for Readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 z-10 pointer-events-none" />
+
+      {/* Live Passenger Indicator */}
+      <LivePassengerIndicator />
 
       {/* UI Layer */}
       <div className="relative z-20 flex flex-col h-full justify-between p-4 md:p-8">
