@@ -6,210 +6,210 @@ export const autoDriver90sPlaylist: Song[] = [
     title: 'Pehla Nasha',
     artist: 'Jo Jeeta Wohi Sikandar',
     artwork: 'https://i.ytimg.com/vi/uTnkxeeLH58/hqdefault.jpg',
-    youtubeVideoId: 'uTnkxeeLH58'
+    youtubeVideoId: 'hwqhgr5L4Ag'
   },
   {
     id: 'song-1786402892639-1',
     title: 'Dheere Dheere Se Meri Zindagi Mein Aana',
     artist: 'Aashiqui',
     artwork: 'https://i.ytimg.com/vi/KeyfUuXPOcY/hqdefault.jpg',
-    youtubeVideoId: 'KeyfUuXPOcY'
+    youtubeVideoId: 'LtfauD88E68'
   },
   {
     id: 'song-1786402892639-2',
     title: 'Nazar Ke Saamne',
     artist: 'Aashiqui',
     artwork: 'https://i.ytimg.com/vi/uNt18l9UfjE/hqdefault.jpg',
-    youtubeVideoId: 'uNt18l9UfjE'
+    youtubeVideoId: '90rP1m3lv4A'
   },
   {
     id: 'song-1786402892639-3',
     title: 'Ek Ladki Ko Dekha',
     artist: '1942: A Love Story',
     artwork: 'https://i.ytimg.com/vi/fTauOK8J-U8/hqdefault.jpg',
-    youtubeVideoId: 'fTauOK8J-U8'
+    youtubeVideoId: 'PUF2nXi4_fU'
   },
   {
     id: 'song-1786402892639-4',
     title: 'Do Dil Mil Rahe Hain',
     artist: 'Pardes',
     artwork: 'https://i.ytimg.com/vi/5SvIuD6wJRI/hqdefault.jpg',
-    youtubeVideoId: '5SvIuD6wJRI'
+    youtubeVideoId: 'G2hGP_Kiqr8'
   },
   {
     id: 'song-1786402892639-5',
     title: 'Pardesi Pardesi',
     artist: 'Raja Hindustani',
     artwork: 'https://i.ytimg.com/vi/QKfGl39ZJWI/hqdefault.jpg',
-    youtubeVideoId: 'QKfGl39ZJWI'
+    youtubeVideoId: '5fAlLomtcdI'
   },
   {
     id: 'song-1786402892639-6',
     title: 'Aankhon Ki Gustakhiyan',
     artist: 'Hum Dil De Chuke Sanam',
     artwork: 'https://i.ytimg.com/vi/7k5gM4ClRRo/hqdefault.jpg',
-    youtubeVideoId: '7k5gM4ClRRo'
+    youtubeVideoId: 'E661EiX7zKw'
   },
   {
     id: 'song-1786402892639-7',
     title: 'Bahon Ke Darmiyan',
     artist: 'Khamoshi',
     artwork: 'https://i.ytimg.com/vi/yx3pXbo1aBM/hqdefault.jpg',
-    youtubeVideoId: 'yx3pXbo1aBM'
+    youtubeVideoId: '-KOc4aMvs48'
   },
   {
     id: 'song-1786402892639-8',
     title: 'Ae Ajnabi',
     artist: 'Dil Se..',
     artwork: 'https://i.ytimg.com/vi/BP0YPNed4fk/hqdefault.jpg',
-    youtubeVideoId: 'BP0YPNed4fk'
+    youtubeVideoId: 'KWTOAY4k6m4'
   },
   {
     id: 'song-1786402892639-9',
     title: 'Ho Nahi Sakta',
     artist: 'Dil Hai Ki Manta Nahin',
     artwork: 'https://i.ytimg.com/vi/IVeGCYxT_IU/hqdefault.jpg',
-    youtubeVideoId: 'IVeGCYxT_IU'
+    youtubeVideoId: '76eMUpezVsc'
   },
   {
     id: 'song-1786402892639-10',
     title: 'Tu Hi Re',
     artist: 'Bombay',
     artwork: 'https://i.ytimg.com/vi/fT4vP4PnLxg/hqdefault.jpg',
-    youtubeVideoId: 'fT4vP4PnLxg'
+    youtubeVideoId: 'OfKeDoCDVyo'
   },
   {
     id: 'song-1786402892639-11',
     title: 'Kehna Hi Kya',
     artist: 'Bombay',
     artwork: 'https://i.ytimg.com/vi/x_elT6zkqN0/hqdefault.jpg',
-    youtubeVideoId: 'x_elT6zkqN0'
+    youtubeVideoId: 'zYRYLlORkZQ'
   },
   {
     id: 'song-1786402892639-12',
     title: 'Hoshwalon Ko Khabar Kya',
     artist: 'Sarfarosh',
     artwork: 'https://i.ytimg.com/vi/qeOfhT44XWg/hqdefault.jpg',
-    youtubeVideoId: 'qeOfhT44XWg'
+    youtubeVideoId: 'QigPJI7xHX0'
   },
   {
     id: 'song-1786402892639-13',
     title: 'Tujhe Dekha To',
     artist: 'Dilwale Dulhania Le Jayenge',
     artwork: 'https://i.ytimg.com/vi/llfkNB3rRTc/hqdefault.jpg',
-    youtubeVideoId: 'llfkNB3rRTc'
+    youtubeVideoId: 'IGn458YAPJE'
   },
   {
     id: 'song-1786402892639-14',
     title: 'Mere Khwabon Mein',
     artist: 'Dilwale Dulhania Le Jayenge',
     artwork: 'https://i.ytimg.com/vi/kY79s9YJp6s/hqdefault.jpg',
-    youtubeVideoId: 'kY79s9YJp6s'
+    youtubeVideoId: 'd3UtoZIqSR0'
   },
   {
     id: 'song-1786402892639-15',
     title: 'Ruk Ja O Dil Deewane',
     artist: 'Dilwale Dulhania Le Jayenge',
     artwork: 'https://i.ytimg.com/vi/_QqOhN4VYfE/hqdefault.jpg',
-    youtubeVideoId: '_QqOhN4VYfE'
+    youtubeVideoId: '39HD0IwwsTs'
   },
   {
     id: 'song-1786402892639-16',
     title: 'Ho Gaya Hai Tujhko To Pyar Sajna',
     artist: 'Dilwale Dulhania Le Jayenge',
     artwork: 'https://i.ytimg.com/vi/hb4PIvr6DIg/hqdefault.jpg',
-    youtubeVideoId: 'hb4PIvr6DIg'
+    youtubeVideoId: '9res_Ml60so'
   },
   {
     id: 'song-1786402892639-17',
     title: 'Baazigar O Baazigar',
     artist: 'Baazigar',
     artwork: 'https://i.ytimg.com/vi/EsXG4YET4zs/hqdefault.jpg',
-    youtubeVideoId: 'EsXG4YET4zs'
+    youtubeVideoId: 'QvCu0h8f7Rg'
   },
   {
     id: 'song-1786402892639-18',
     title: 'Kitaben Bahut Si',
     artist: 'Baazigar',
     artwork: 'https://i.ytimg.com/vi/hcCvSmjHwGY/hqdefault.jpg',
-    youtubeVideoId: 'hcCvSmjHwGY'
+    youtubeVideoId: 'K2eo-EEJtX4'
   },
   {
     id: 'song-1786402892639-19',
     title: 'Ghar Se Nikalte Hi',
     artist: 'Papa Kehte Hain',
     artwork: 'https://i.ytimg.com/vi/K-pX4qwtAxA/hqdefault.jpg',
-    youtubeVideoId: 'K-pX4qwtAxA'
+    youtubeVideoId: 'Yy0tnxRk87w'
   },
   {
     id: 'song-1786402892639-20',
     title: 'Aaye Ho Meri Zindagi Mein',
     artist: 'Raja Hindustani',
     artwork: 'https://i.ytimg.com/vi/xVViRaALOLM/hqdefault.jpg',
-    youtubeVideoId: 'xVViRaALOLM'
+    youtubeVideoId: '6gY920aqxbc'
   },
   {
     id: 'song-1786402892639-21',
     title: 'Mera Dil Bhi Kitna Pagal Hai',
     artist: 'Saajan',
     artwork: 'https://i.ytimg.com/vi/ekPjEpWKk74/hqdefault.jpg',
-    youtubeVideoId: 'ekPjEpWKk74'
+    youtubeVideoId: 'ld5HS2A8G5M'
   },
   {
     id: 'song-1786402892639-22',
     title: 'Bahut Pyar Karte Hain',
     artist: 'Saajan',
     artwork: 'https://i.ytimg.com/vi/Bm1t6ZAwljQ/hqdefault.jpg',
-    youtubeVideoId: 'Bm1t6ZAwljQ'
+    youtubeVideoId: 'jCoOkcynbAg'
   },
   {
     id: 'song-1786402892639-23',
     title: 'Jeeye To Jeeye Kaise',
     artist: 'Saajan',
     artwork: 'https://i.ytimg.com/vi/6PQEbNx5gys/hqdefault.jpg',
-    youtubeVideoId: '6PQEbNx5gys'
+    youtubeVideoId: 'Ti9DwV2N8bY'
   },
   {
     id: 'song-1786402892639-24',
     title: 'Chura Ke Dil Mera',
     artist: 'Main Khiladi Tu Anari',
     artwork: 'https://i.ytimg.com/vi/I6qPySAJWJs/hqdefault.jpg',
-    youtubeVideoId: 'I6qPySAJWJs'
+    youtubeVideoId: 'qwZZEvuqWg8'
   },
   {
     id: 'song-1786402892639-25',
     title: 'Mujhe Neend Na Aaye',
     artist: 'Dil',
     artwork: 'https://i.ytimg.com/vi/3OXiqmUhB70/hqdefault.jpg',
-    youtubeVideoId: '3OXiqmUhB70'
+    youtubeVideoId: 'b1pVX8JruxQ'
   },
   {
     id: 'song-1786402892639-26',
     title: 'Humko Sirf Tumse Pyaar Hai',
     artist: 'Barsaat',
     artwork: 'https://i.ytimg.com/vi/9YjBFm9DX_A/hqdefault.jpg',
-    youtubeVideoId: '9YjBFm9DX_A'
+    youtubeVideoId: 'UmnAlNWcQGA'
   },
   {
     id: 'song-1786402892639-27',
     title: 'Aankhon Se Tune Kya Keh Diya',
     artist: 'Ghulam',
     artwork: 'https://i.ytimg.com/vi/9GbRZI-RhTY/hqdefault.jpg',
-    youtubeVideoId: '9GbRZI-RhTY'
+    youtubeVideoId: 'AoEBGEkArpc'
   },
   {
     id: 'song-1786402892639-28',
     title: 'Jaadu Hai Tera Hi Jaadu',
     artist: 'Ghulam',
     artwork: 'https://i.ytimg.com/vi/Ll4S3Osgca8/hqdefault.jpg',
-    youtubeVideoId: 'Ll4S3Osgca8'
+    youtubeVideoId: 'C0syqIGc5Hc'
   },
   {
     id: 'song-1786402892639-29',
     title: 'Ishq Bina',
     artist: 'Taal',
     artwork: 'https://i.ytimg.com/vi/h6by4WdrJq0/hqdefault.jpg',
-    youtubeVideoId: 'h6by4WdrJq0'
+    youtubeVideoId: 'tCdvAvGwsgU'
   },
   {
     "id": "song-1786426691945-30",
