@@ -66,14 +66,6 @@ export const LivePassengerIndicator: React.FC = () => {
             Passengers on ride
           </span>
         </div>
-        
-        {/* Pulse Dot */}
-        <div className="relative flex h-2 w-2 md:h-2.5 md:w-2.5 items-center justify-center ml-1">
-          {isConnected && (
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-auto-yellow opacity-40"></span>
-          )}
-          <span className={`relative inline-flex rounded-full h-1.5 w-1.5 md:h-2 md:w-2 ${isConnected ? 'bg-auto-yellow' : 'bg-zinc-600'}`}></span>
-        </div>
       </div>
     </div>
   );
