@@ -40,8 +40,6 @@ export interface Driver {
   image?: string;
 }
 
-export type EnvironmentState = 'night' | 'rain' | 'traffic' | 'quiet';
-
 export interface PlayerState {
   currentSong: Song | null;
   history: string[]; // Stores previously played song IDs
@@ -51,7 +49,5 @@ export interface PlayerState {
   isMuted: boolean;
   driver: Driver | null;
   currentMessage: string | null;
-  environment: EnvironmentState;
   distance: number; // in km
-  fare: number; // in INR
 }

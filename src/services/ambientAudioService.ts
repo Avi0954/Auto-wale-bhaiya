@@ -8,11 +8,11 @@ class AmbientAudioService {
   private isMusicPlaying = false;
 
   // Target volumes
-  private readonly ENGINE_PLAYING_VOL = 0.12;
-  private readonly ENGINE_PAUSED_VOL = 0.25;
-  private readonly AMBIENCE_PLAYING_VOL = 0.4;
-  private readonly AMBIENCE_PAUSED_VOL = 0.7;
-  private readonly BUMP_VOL = 0.3;
+  private readonly ENGINE_PLAYING_VOL = 0.11;
+  private readonly ENGINE_PAUSED_VOL = 0.28;
+  private readonly AMBIENCE_PLAYING_VOL = 0.28;
+  private readonly AMBIENCE_PAUSED_VOL = 0.65;
+  private readonly BUMP_VOL = 0.28;
 
   constructor() {
     // Note: If files are missing, the browser will log a 404 but won't crash the JS.
@@ -73,15 +73,17 @@ class AmbientAudioService {
 
     const targetEngineVol = this.isMusicPlaying ? this.ENGINE_PLAYING_VOL : this.ENGINE_PAUSED_VOL;
     const targetAmbienceVol = this.isMusicPlaying ? this.AMBIENCE_PLAYING_VOL : this.AMBIENCE_PAUSED_VOL;
+    
+    const fadeDuration = this.isMusicPlaying ? 1000 : 1200; // 1s ducking, 1.2s unducking
 
-    this.fadeVolume(this.engineAudio, targetEngineVol, true);
-    this.fadeVolume(this.ambienceAudio, targetAmbienceVol, false);
+    this.fadeVolume(this.engineAudio, targetEngineVol, true, fadeDuration);
+    this.fadeVolume(this.ambienceAudio, targetAmbienceVol, false, fadeDuration);
   }
 
   private engineFadeInterval: number | null = null;
   private ambienceFadeInterval: number | null = null;
 
-  private fadeVolume(audio: HTMLAudioElement, targetVolume: number, isEngine: boolean) {
+  private fadeVolume(audio: HTMLAudioElement, targetVolume: number, isEngine: boolean, durationMs: number) {
     if (isEngine && this.engineFadeInterval) clearInterval(this.engineFadeInterval);
     if (!isEngine && this.ambienceFadeInterval) clearInterval(this.ambienceFadeInterval);
 
@@ -90,8 +92,8 @@ class AmbientAudioService {
     
     if (difference === 0) return;
 
-    const steps = 20;
-    const stepTime = 500 / steps;
+    const steps = Math.floor(durationMs / 50); // Updates every 50ms
+    const stepTime = 50;
     const stepAmount = difference / steps;
     
     let currentStep = 0;

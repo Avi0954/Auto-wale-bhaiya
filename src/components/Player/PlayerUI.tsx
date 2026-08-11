@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { usePlayerStore } from '../../store/usePlayerStore';
 import { Play, Pause, SkipForward, SkipBack, Disc3 } from 'lucide-react';
-import { getNextSong } from '../../utils/selectionEngine';
-import { autoDriver90sPlaylist as songs } from '../../data/autoDriver90sPlaylist';
+
+
 import { youtubeService } from '../../services/youtubeService';
 
 export const PlayerUI: React.FC = () => {
-  const { currentSong, isPlaying, togglePlay, nextSong, prevSong, driver, history, volume, setVolume } = usePlayerStore();
+  const { currentSong, isPlaying, togglePlay, nextSong, prevSong, volume, setVolume } = usePlayerStore();
   
   const [timeStr, setTimeStr] = useState("00:00");
   
@@ -51,17 +51,12 @@ export const PlayerUI: React.FC = () => {
 
   if (!currentSong) return null;
 
-  const nextSongPreview = driver ? getNextSong(driver.id, currentSong.id, songs, history) : null;
+
   const rotation = -135 + (volume * 270);
 
   return (
     <div className="w-full max-w-[580px] flex flex-col gap-1 mx-auto font-sans">
-      {/* Up Next label */}
-      {nextSongPreview && (
-        <div className="text-white/30 text-[10px] md:text-xs font-medium tracking-wide uppercase px-2 text-right mb-0.5 drop-shadow-md">
-          UP NEXT · {nextSongPreview.title}
-        </div>
-      )}
+
       
       {/* The Physical Stereo Unit */}
       <div className="bg-[#0a0a0a] rounded-sm p-1.5 md:p-2 flex flex-col gap-1.5 md:gap-2 relative border-t-[1.5px] border-l-[1.5px] border-zinc-700/60 border-b-2 border-r-2 border-black shadow-[0_15px_35px_rgba(0,0,0,0.8),inset_0_0_15px_rgba(0,0,0,1)] overflow-hidden">

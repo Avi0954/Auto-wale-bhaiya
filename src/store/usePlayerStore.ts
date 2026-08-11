@@ -1,12 +1,10 @@
 import { create } from 'zustand';
-import type { PlayerState, Song, EnvironmentState } from '../types';
+import type { PlayerState, Song } from '../types';
 import { autoDriver90sPlaylist as songs } from '../data/autoDriver90sPlaylist';
 import { drivers } from '../data/drivers';
 import { getNextSong, getPreviousSong } from '../utils/selectionEngine';
 import { youtubeService } from '../services/youtubeService';
 import { ambientAudioService } from '../services/ambientAudioService';
-
-const ENVIRONMENTS: EnvironmentState[] = ['night', 'rain', 'traffic', 'quiet'];
 
 interface PlayerStore extends PlayerState {
   consecutiveSongsPlayed: number;
@@ -87,9 +85,7 @@ export const usePlayerStore = create<PlayerStore>((set, get) => {
     isMuted: false,
     driver: null,
     currentMessage: null,
-    environment: 'night',
     distance: 0.0,
-    fare: 25.0,
     consecutiveSongsPlayed: 0,
     messageTimeoutId: null,
     isBumping: false,
@@ -131,9 +127,7 @@ export const usePlayerStore = create<PlayerStore>((set, get) => {
         isPlaying: true, 
         history: [], 
         currentMessage: message,
-        environment: 'night',
         distance: 0.0,
-        fare: 25.0,
         consecutiveSongsPlayed: 0,
         messageTimeoutId: timeoutId,
         isBumping: false
@@ -261,13 +255,6 @@ export const usePlayerStore = create<PlayerStore>((set, get) => {
       if (!state.isPlaying) return;
 
       const newDistance = state.distance + 0.02;
-      const newFare = state.fare + (0.02 * 15);
-      
-      let newEnv = state.environment;
-      if (Math.random() < 0.02) {
-        const otherEnvs = ENVIRONMENTS.filter(e => e !== state.environment);
-        newEnv = otherEnvs[Math.floor(Math.random() * otherEnvs.length)];
-      }
 
       // Random road bump (average every ~40 seconds)
       if (Math.random() < 0.025 && !state.isBumping) {
@@ -285,7 +272,7 @@ export const usePlayerStore = create<PlayerStore>((set, get) => {
         currentProgress = Math.min(100, state.progress + (2000 / 15000) * 100);
       }
 
-      set({ distance: newDistance, fare: newFare, environment: newEnv, progress: currentProgress });
+      set({ distance: newDistance, progress: currentProgress });
     }
   };
 });
