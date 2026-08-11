@@ -20,21 +20,28 @@ function App() {
         ambientAudioService.setMusicPlaying(true);
       }
       document.removeEventListener('pointerdown', handleFirstInteraction);
+      document.removeEventListener('touchstart', handleFirstInteraction);
       document.removeEventListener('keydown', handleFirstInteraction);
     };
 
     document.addEventListener('pointerdown', handleFirstInteraction, { once: true });
+    document.addEventListener('touchstart', handleFirstInteraction, { once: true });
     document.addEventListener('keydown', handleFirstInteraction, { once: true });
 
     return () => {
       document.removeEventListener('pointerdown', handleFirstInteraction);
+      document.removeEventListener('touchstart', handleFirstInteraction);
       document.removeEventListener('keydown', handleFirstInteraction);
     };
   }, []);
 
   return (
     <div className="w-full min-h-screen bg-black text-white font-sans selection:bg-auto-yellow selection:text-black">
-      <div id="youtube-player-container" style={{ display: 'none' }} />
+      {/* YouTube player must NOT be display:none, otherwise mobile browsers block playback */}
+      <div 
+        id="youtube-player-container" 
+        style={{ position: 'absolute', width: '1px', height: '1px', opacity: 0, pointerEvents: 'none', zIndex: -10 }} 
+      />
       {driver ? <Ride /> : null}
     </div>
   );

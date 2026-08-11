@@ -36,6 +36,22 @@ const playYoutubeAudio = (song: Song, get: () => PlayerStore) => {
       }
     }, 15000);
   }
+
+  // Setup Mobile/Lock Screen Controls (Media Session API)
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: song.title,
+      artist: song.artist,
+      artwork: song.artwork ? [
+        { src: song.artwork, sizes: '512x512', type: 'image/jpeg' }
+      ] : []
+    });
+
+    navigator.mediaSession.setActionHandler('play', () => get().togglePlay());
+    navigator.mediaSession.setActionHandler('pause', () => get().togglePlay());
+    navigator.mediaSession.setActionHandler('previoustrack', () => get().prevSong());
+    navigator.mediaSession.setActionHandler('nexttrack', () => get().nextSong(true));
+  }
 };
 
 // Setup global YouTube listeners once
