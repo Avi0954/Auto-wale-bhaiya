@@ -99,6 +99,14 @@ export const PlayerUI: React.FC = () => {
     (e.target as HTMLElement).releasePointerCapture(e.pointerId);
   };
 
+  const handleWheel = (e: React.WheelEvent) => {
+    const deltaY = -e.deltaY;
+    const deltaVol = deltaY * 0.001; 
+    let newVol = volume + deltaVol;
+    newVol = Math.max(0, Math.min(1, newVol));
+    setVolume(newVol);
+  };
+
   if (!currentSong) return null;
 
 
@@ -186,6 +194,7 @@ export const PlayerUI: React.FC = () => {
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
               onPointerCancel={handlePointerUp}
+              onWheel={handleWheel}
             >
               <div 
                 className="absolute w-full h-full transition-transform duration-75"
