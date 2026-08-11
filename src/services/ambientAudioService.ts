@@ -46,6 +46,14 @@ class AmbientAudioService {
     this.isMusicPlaying = playing;
     if (!this.isInitialized && playing) {
        this.init();
+    } else if (playing) {
+      // If it was blocked by autoplay earlier, try playing again when user interacts
+      if (this.engineAudio.paused) {
+        this.engineAudio.play().catch(() => {});
+      }
+      if (this.ambienceAudio.paused) {
+        this.ambienceAudio.play().catch(() => {});
+      }
     }
     this.updateVolumes();
   }
