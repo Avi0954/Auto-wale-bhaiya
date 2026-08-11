@@ -59,7 +59,7 @@ export const Ride: React.FC = () => {
             </div>
             
             {/* Top-center: Status */}
-            <div className="flex items-center gap-2 px-3 py-1 bg-black/20 backdrop-blur-sm rounded-full text-white/90 border border-white/10 shadow-lg">
+            <div className="flex items-center gap-2 text-white/60 font-normal">
               <div className="w-1.5 h-1.5 rounded-full bg-auto-green animate-pulse" />
               <span>629 on the road</span>
             </div>
@@ -67,18 +67,18 @@ export const Ride: React.FC = () => {
             {/* Top-right: Sound Utility */}
             <button 
               onClick={toggleMute}
-              className="text-white/80 hover:text-white transition-colors drop-shadow-md min-w-[80px] flex justify-end p-2"
+              className="text-white/60 hover:text-white/90 transition-colors min-w-[80px] flex justify-end p-2"
             >
               {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
             </button>
           </div>
 
           {/* Top-center: Wordmark & Micro-context */}
-          <div className="text-center w-full flex flex-col items-center gap-1.5 mt-2">
-            <h1 className="text-2xl md:text-3xl font-bold tracking-[0.5em] text-white/90 drop-shadow-xl uppercase ml-[0.5em]">
+          <div className="text-center w-full flex flex-col items-center gap-1 mt-2">
+            <h1 className="text-xl md:text-2xl font-semibold tracking-[0.2em] text-white/90 uppercase ml-[0.2em]">
               AUTO WALO BHAIYA
             </h1>
-            <span className="text-[9px] md:text-[10px] tracking-widest text-white/40 uppercase">
+            <span className="text-[9px] md:text-[10px] tracking-widest text-white/30 uppercase font-light">
               90s Romance
             </span>
           </div>
