@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "update-playlist": "node scratch/fetch_user_playlist.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",
@@ -19,7 +20,9 @@
     "react-dom": "^19.2.8",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.3",
+    "youtube-sr": "^4.3.12",
     "yt-search": "^2.13.1",
+    "ytpl": "^2.3.0",
     "zustand": "^5.0.14"
   },
   "devDependencies": {
