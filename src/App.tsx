@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { usePlayerStore } from './store/usePlayerStore';
 import { Ride } from './pages/Ride';
 import { youtubeService } from './services/youtubeService';
