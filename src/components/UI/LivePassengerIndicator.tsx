@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 export const LivePassengerIndicator: React.FC = () => {
   const [count, setCount] = useState<number>(1); // Defaults to 1 (the current user)
-  const [isConnected, setIsConnected] = useState<boolean>(false);
 
   useEffect(() => {
     // In production, you would point this to your deployed WebSocket URL
@@ -16,7 +15,7 @@ export const LivePassengerIndicator: React.FC = () => {
       ws = new WebSocket(wsUrl);
 
       ws.onopen = () => {
-        setIsConnected(true);
+        // Connected
       };
 
       ws.onmessage = (event) => {
@@ -31,7 +30,6 @@ export const LivePassengerIndicator: React.FC = () => {
       };
 
       ws.onclose = () => {
-        setIsConnected(false);
         // Attempt to reconnect after 3 seconds
         reconnectTimer = window.setTimeout(connect, 3000);
       };

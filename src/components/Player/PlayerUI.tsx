@@ -8,20 +8,70 @@ import { youtubeService } from '../../services/youtubeService';
 export const PlayerUI: React.FC = () => {
   const { currentSong, isPlaying, togglePlay, nextSong, prevSong, volume, setVolume } = usePlayerStore();
   
-  const [timeStr, setTimeStr] = useState("00:00");
-  
-  // LED Clock sync
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isScrubbing, setIsScrubbing] = useState(false);
+  const [scrubProgress, setScrubProgress] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  // Sync time & duration
   useEffect(() => {
     const interval = setInterval(() => {
-      if (isPlaying) {
+      const d = youtubeService.getDuration();
+      setDuration(d);
+      
+      if (!isScrubbing) {
         const t = youtubeService.getCurrentTime();
-        const mins = Math.floor(t / 60);
-        const secs = Math.floor(t % 60);
-        setTimeStr(`${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`);
+        setCurrentTime(t);
       }
     }, 500);
     return () => clearInterval(interval);
-  }, [isPlaying]);
+  }, [isScrubbing]);
+
+  const formatTime = (t: number) => {
+    if (!t || isNaN(t)) return "00:00";
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60);
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
+
+  const displayTime = isScrubbing ? (scrubProgress * duration) : currentTime;
+  const timeStr = formatTime(displayTime);
+  const durationStr = formatTime(duration);
+  const progressPercent = duration > 0 ? (displayTime / duration) * 100 : 0;
+
+  const updateScrubPosition = (clientX: number) => {
+    if (!trackRef.current) return;
+    const rect = trackRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+    setScrubProgress(x / rect.width);
+  };
+
+  const handleSeekDown = (e: React.PointerEvent) => {
+    if (!trackRef.current) return;
+    setIsScrubbing(true);
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    updateScrubPosition(e.clientX);
+  };
+
+  const handleSeekMove = (e: React.PointerEvent) => {
+    if (!isScrubbing) return;
+    updateScrubPosition(e.clientX);
+  };
+
+  const handleSeekUp = (e: React.PointerEvent) => {
+    if (!isScrubbing) return;
+    setIsScrubbing(false);
+    (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+    
+    if (trackRef.current && duration > 0) {
+      const rect = trackRef.current.getBoundingClientRect();
+      const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+      const percentage = x / rect.width;
+      youtubeService.seekTo(percentage * duration);
+      setCurrentTime(percentage * duration);
+    }
+  };
 
   // Physical Knob Interaction
   const [isDragging, setIsDragging] = useState(false);
@@ -152,12 +202,38 @@ export const PlayerUI: React.FC = () => {
           
         </div>
         
-        {/* Subtle Progress Track (integrated into stereo body) */}
-        <div className="w-full h-1 bg-black rounded-full overflow-hidden mt-0.5 shadow-[inset_0_1px_2px_rgba(0,0,0,1)] relative">
+        {/* Interactive Seek Bar */}
+        <div className="w-full flex items-center gap-2 px-1 mt-1 mb-0.5">
+          <span className="text-[9px] font-mono text-zinc-500 font-bold tracking-wider w-8 text-right flex-shrink-0 select-none">
+            {timeStr}
+          </span>
+          
           <div 
-            className="absolute top-0 left-0 h-full bg-zinc-700 transition-all duration-[2000ms] ease-linear"
-            style={{ width: `${usePlayerStore(state => state.progress)}%` }}
-          />
+            className="flex-1 relative h-6 flex items-center cursor-pointer group touch-none py-2"
+            ref={trackRef}
+            onPointerDown={handleSeekDown}
+            onPointerMove={handleSeekMove}
+            onPointerUp={handleSeekUp}
+            onPointerCancel={handleSeekUp}
+          >
+            {/* The thin visual track */}
+            <div className="w-full h-1 bg-black rounded-full shadow-[inset_0_1px_2px_rgba(0,0,0,1)] overflow-hidden relative">
+              <div 
+                className={`absolute top-0 left-0 h-full bg-auto-yellow ${isScrubbing ? 'transition-none' : 'transition-all duration-300'}`}
+                style={{ width: `${progressPercent}%` }}
+              />
+            </div>
+            
+            {/* The handle */}
+            <div 
+              className={`absolute h-2.5 w-2.5 bg-auto-yellow rounded-full shadow-[0_0_4px_rgba(255,190,0,0.8)] -ml-[5px] transition-transform duration-100 ${isScrubbing ? 'scale-125' : 'scale-0 group-hover:scale-100'}`}
+              style={{ left: `${progressPercent}%` }}
+            />
+          </div>
+
+          <span className="text-[9px] font-mono text-zinc-600 font-bold tracking-wider w-8 flex-shrink-0 select-none">
+            {durationStr}
+          </span>
         </div>
       </div>
     </div>
