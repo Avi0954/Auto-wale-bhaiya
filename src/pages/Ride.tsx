@@ -84,8 +84,7 @@ export const Ride: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Area Stack */}
-        <div className="flex flex-col items-center w-full gap-4 md:gap-8 pb-2 md:pb-0">
+        <div className="flex flex-col items-center w-full gap-4 md:gap-8 pb-0">
           
           {/* Driver Message Floating Bubble */}
           <div className="w-full max-w-lg flex justify-start md:justify-center px-2">
@@ -101,15 +100,15 @@ export const Ride: React.FC = () => {
           {/* Floating Mini Player */}
           <PlayerUI />
 
-          {/* Next Auto Action */}
-          <button 
-            onClick={() => initRide()}
-            className="text-[10px] md:text-xs tracking-widest text-white/50 hover:text-white/70 transition-opacity uppercase mt-1 mb-2 md:mb-0"
-          >
-            NEXT AUTO ↻
-          </button>
         </div>
         
+        {/* Next Auto Action (Absolute Bottom Right) */}
+        <button 
+          onClick={() => initRide()}
+          className="absolute right-5 bottom-5 md:right-8 md:bottom-8 lg:right-10 lg:bottom-9 text-[10px] md:text-xs tracking-widest text-white/50 hover:text-white/70 transition-opacity uppercase z-50"
+        >
+          NEXT AUTO ↻
+        </button>
       </div>
     </div>
   );
