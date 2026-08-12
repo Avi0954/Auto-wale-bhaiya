@@ -9,6 +9,7 @@ import { ambientAudioService } from '../services/ambientAudioService';
 interface PlayerStore extends PlayerState {
   consecutiveSongsPlayed: number;
   messageTimeoutId: ReturnType<typeof setTimeout> | null;
+  isAdvancing: boolean;
   initRide: (driverId?: string) => void;
   playSong: (song: Song) => void;
   togglePlay: () => void;
@@ -23,8 +24,21 @@ interface PlayerStore extends PlayerState {
   triggerBump: () => void;
 }
 
+const isValidYouTubeId = (id: any): boolean => {
+  if (typeof id !== 'string') return false;
+  if (id.length !== 11) return false;
+  return /^[A-Za-z0-9_-]{11}$/.test(id);
+};
+
 const playYoutubeAudio = (song: Song, get: () => PlayerStore) => {
   if (song.youtubeVideoId) {
+    if (!isValidYouTubeId(song.youtubeVideoId)) {
+      console.warn(`Invalid YouTube ID detected for song "${song.title}": ${song.youtubeVideoId}. Skipping track.`);
+      setTimeout(() => {
+        get().nextSong(false);
+      }, 0);
+      return;
+    }
     youtubeService.loadAndPlay(song.youtubeVideoId);
     youtubeService.setVolume(get().volume);
   } else {
@@ -83,7 +97,13 @@ const setupYoutubeListeners = (get: () => PlayerStore) => {
   youtubeService.on('error', () => {
     // Skip unavailable or un-embeddable videos seamlessly
     console.warn("YouTube Player Error, skipping to next track");
-    get().nextSong(false);
+    const store = get();
+    if (store.isAdvancing) return;
+    usePlayerStore.setState({ isAdvancing: true });
+    setTimeout(() => {
+      get().nextSong(false);
+      usePlayerStore.setState({ isAdvancing: false });
+    }, 1000);
   });
 };
 
@@ -104,6 +124,7 @@ export const usePlayerStore = create<PlayerStore>((set, get) => {
     distance: 0.0,
     consecutiveSongsPlayed: 0,
     messageTimeoutId: null,
+    isAdvancing: false,
     isBumping: false,
 
     triggerBump: () => {
