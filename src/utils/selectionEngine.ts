@@ -1,17 +1,6 @@
 import { drivers } from '../data/drivers';
 import type { Song, Driver } from '../types';
 
-export const RECENT_HISTORY_LIMIT = 3;
-
-/**
- * Checks if a song is in the recently played history.
- */
-export function isRecentlyPlayed(songId: string, history: string[]): boolean {
-  // Only look at the last RECENT_HISTORY_LIMIT songs
-  const recentHistory = history.slice(-RECENT_HISTORY_LIMIT);
-  return recentHistory.includes(songId);
-}
-
 /**
  * Calculates a weight for a song based on driver preferences.
  * High = 3x, Medium = 1.5x, Low = 0.1x, Unmatched = 1x
@@ -32,6 +21,39 @@ export function getSongWeight(song: Song, driver: Driver): number {
 }
 
 /**
+ * Gets the valid songs for the current round of the "True Shuffle" (Deck Shuffle).
+ */
+export function getValidSongs(songPool: Song[], currentSongId: string | null, history: string[]): Song[] {
+  if (songPool.length === 0) return [];
+
+  // Effective history includes the currently playing song
+  const effectiveHistory = currentSongId ? [...history, currentSongId] : [...history];
+  const playedInRoundCount = effectiveHistory.length % songPool.length;
+  
+  let excludeList: string[] = [];
+  
+  // If playedInRoundCount is 0, we've played exactly a multiple of the pool size.
+  // This means a new "deck" is starting.
+  // We only exclude the current song to avoid playing it twice in a row at the deck boundary.
+  if (playedInRoundCount === 0) {
+    excludeList = currentSongId ? [currentSongId] : [];
+  } else {
+    // Exclude all songs that have already been played in this current deck round
+    excludeList = effectiveHistory.slice(-playedInRoundCount);
+  }
+  
+  let validSongs = songPool.filter(s => !excludeList.includes(s.id));
+  
+  // Fallbacks just in case something goes wrong
+  if (validSongs.length === 0) {
+    validSongs = songPool.filter(s => s.id !== currentSongId);
+    if (validSongs.length === 0) validSongs = songPool;
+  }
+  
+  return validSongs;
+}
+
+/**
  * Selects a weighted random song for a specific driver, avoiding recent history.
  */
 export function getWeightedRandomSong(
@@ -48,16 +70,7 @@ export function getWeightedRandomSong(
     return getRandomSong(songPool, currentSongId, history, randomFn);
   }
 
-  // Filter out current song and recently played songs
-  let validSongs = songPool.filter(
-    s => s.id !== currentSongId && !isRecentlyPlayed(s.id, history)
-  );
-
-  // Fallback: If filtering is too strict (e.g. pool is very small), just filter current song
-  if (validSongs.length === 0) {
-    validSongs = songPool.filter(s => s.id !== currentSongId);
-    if (validSongs.length === 0) validSongs = songPool; // absolute fallback
-  }
+  const validSongs = getValidSongs(songPool, currentSongId, history);
 
   // Calculate total weight
   let totalWeight = 0;
@@ -86,14 +99,7 @@ export function getRandomSong(
   history: string[] = [],
   randomFn: () => number = Math.random
 ): Song {
-  let validSongs = songPool.filter(
-    s => s.id !== currentSongId && !isRecentlyPlayed(s.id, history)
-  );
-  
-  if (validSongs.length === 0) {
-    validSongs = songPool.filter(s => s.id !== currentSongId);
-    if (validSongs.length === 0) validSongs = songPool;
-  }
+  const validSongs = getValidSongs(songPool, currentSongId, history);
 
   const index = Math.floor(randomFn() * validSongs.length);
   return validSongs[index];
